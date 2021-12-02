@@ -1,0 +1,16 @@
+.element-post-carousel {
+  .item-post {
+    @include flexbox();
+    @include flex-direction(column);
+    @include flex(1);
+
+    &__content {
+      padding: 15px;
+      border: 1px solid $border-color;
+
+      .title {
+        font-size: 18px;
+      }
+    }
+  }
+}
