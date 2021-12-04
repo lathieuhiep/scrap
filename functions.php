@@ -142,20 +142,6 @@ if ( ! function_exists( 'scrap_ilc_mce_buttons' ) ) :
 
 endif;
 
-// Start Customize mce editor font sizes
-if ( ! function_exists( 'scrap_mce_text_sizes' ) ) :
-
-	function scrap_mce_text_sizes( $scrap_font_size_text ) {
-		$scrap_font_size_text['fontsize_formats'] = "9px 10px 12px 13px 14px 16px 17px 18px 19px 20px 21px 24px 28px 32px 36px";
-
-		return $scrap_font_size_text;
-	}
-
-	add_filter( 'tiny_mce_before_init', 'scrap_mce_text_sizes' );
-
-endif;
-// End Customize mce editor font sizes
-
 /* callback comment list */
 function scrap_comments( $scrap_comment, $scrap_comment_args, $scrap_comment_depth ) {
 

@@ -58,6 +58,22 @@ class scrap_widget_testimonial_slider extends Widget_Base {
             ]
         );
 
+	    $repeater->add_control(
+		    'list_rate',
+		    [
+			    'label'     =>  esc_html__( 'Rate', 'scrap' ),
+			    'type'      =>  Controls_Manager::SELECT,
+			    'default'   =>  '5',
+			    'options'   =>  [
+				    '1' =>  1,
+				    '2' =>  2,
+				    '3' =>  3,
+				    '4' =>  4,
+				    '5' =>  5
+			    ],
+		    ]
+	    );
+
         $repeater->add_control(
             'list_image',
             [
@@ -168,9 +184,17 @@ class scrap_widget_testimonial_slider extends Widget_Base {
             'loop' => ('yes' === $settings['loop']),
             'nav' => ('yes' === $settings['nav']),
             'dots' => ('yes' === $settings['dots']),
-            'margin' => $settings['margin_item'],
+            'margin' => 20,
             'autoplay' => ('yes' === $settings['autoplay']),
-            'items' => 1
+            'responsive' => [
+	            '0' => array(
+		            'items'     =>  1,
+		            'margin'    =>  0
+	            ),
+	            '768' => array(
+		            'items'     =>  2,
+	            ),
+            ]
         ];
     ?>
 
@@ -181,20 +205,36 @@ class scrap_widget_testimonial_slider extends Widget_Base {
                     $imageId = $item['list_image']['id'];
                 ?>
 
-                    <div class="item text-center elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>">
-                        <div class="item__image">
-                            <?php
-                            if ( $imageId ) :
-                                echo wp_get_attachment_image( $item['list_image']['id'], array('150', '150') );
-                            else:
-                            ?>
-                                <img src="<?php echo esc_url( get_theme_file_uri( '/assets/images/user-avatar.png' ) ) ?>" alt="<?php echo esc_attr( $item['list_title'] ); ?>" />
-                            <?php endif; ?>
+                    <div class="item d-flex elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>">
+                        <div class="item__image flex-shrink-0">
+                            <figure>
+	                            <?php
+	                            if ( $imageId ) :
+		                            echo wp_get_attachment_image( $item['list_image']['id'], array('150', '150') );
+	                            else:
+		                            ?>
+                                    <img src="<?php echo esc_url( get_theme_file_uri( '/assets/images/user-avatar.png' ) ) ?>" alt="<?php echo esc_attr( $item['list_title'] ); ?>" />
+	                            <?php endif; ?>
+                            </figure>
                         </div>
 
-                        <div class="item__content">
+                        <div class="item__content flex-shrink-1">
                             <div class="desc">
                                 <?php echo wp_kses_post( $item['list_description'] ) ?>
+                            </div>
+
+                            <div class="rate">
+                                <?php
+                                for ( $i = 1; $i <= 5; $i++ ) :
+
+	                                $classGray = '';
+                                    if ( $item['list_rate'] != 5 && $i > $item['list_rate'] ) {
+                                        $classGray = ' color-grey';
+                                    }
+
+                                ?>
+                                    <i class="fas fa-star<?php echo esc_attr( $classGray ); ?>"></i>
+                                <?php endfor; ?>
                             </div>
 
                             <div class="name">
