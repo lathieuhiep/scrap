@@ -1,0 +1,73 @@
+.element-price-table {
+  text-align: center;
+  @include flexbox();
+
+  .item {
+    border: 1px solid #ebedf1;
+    background-color: #ffffff;
+    @include flexbox();
+    @include flex-direction(column);
+    @include flex(1 1 auto);
+
+    .header {
+      padding: 0.75em;
+      @include flexbox();
+      @include flex-direction(column);
+      @include flex(1);
+    }
+
+    .title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 30px;
+      @include flex(1);
+    }
+
+    .price {
+      .price-amount {
+        font-size: 40px;
+        color: #10469c;
+        font-weight: 500;
+
+        .price-currency {
+          font-size: 16px;
+          color: #4a4a4a;
+          font-weight: 400;
+          vertical-align: super;
+        }
+      }
+    }
+
+    .sub-title {
+      font-size: 12px;
+      line-height: 1.6em;
+      font-weight: 500;
+
+      p {
+        &:not(:last-child) {
+          margin-bottom: 12px;
+        }
+      }
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      font-size: 14px;
+
+      li {
+        padding: 1em;
+        color: #4a4a4a;
+
+        &:nth-child(odd) {
+          background-color: #f0f5ff;
+        }
+      }
+    }
+
+    &:not(:last-child) {
+      border-right-width: 0;
+    }
+  }
+}
